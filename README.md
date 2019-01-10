@@ -1,2 +1,2 @@
-# Qa-Admin-App
-Qa Admin app using vue Js express Js
+# QA Admin app
+VueJs template using Webpack 4
