@@ -58,9 +58,9 @@ export default {
       required: true
     }
   },
-  data: function () {
-    return {
-      tableData: this.value
+  computed: {
+    tableData: function () {
+      return this.data
     }
   },
   methods: {
@@ -86,7 +86,3 @@ export default {
   template: '#table-component'
 }
 </script>
-
-<style lang="css" scoped>
-  @import './table.style.css'
-</style>
