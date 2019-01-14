@@ -10,7 +10,7 @@
       <thead>
         <tr>
           <th
-            v-for="(col, index) in columns"
+            v-for="(col, index) in tableCol"
             :key="index"
           >
             {{ col.name }}
@@ -23,7 +23,7 @@
           :key="index"
         >
           <td
-            v-for="(col, idx) in columns"
+            v-for="(col, idx) in tableCol"
             :key="idx"
           >
             <div v-if="!col.editable">
@@ -58,21 +58,23 @@ export default {
       required: true
     }
   },
-  computed: {
-    tableData: function () {
-      return this.data
+  data: function () {
+    console.log(this.data)
+    return {
+      tableData: this.data,
+      tableCol: this.columns
     }
   },
   methods: {
     saveOrder: function () {
-      const sortedData = this.value.sort((a, b) => {
+      const sortedData = this.tableData.sort((a, b) => {
         return (a.order > b.order) ? 1 : -1
       })
 
       this.tableData = [].concat(sortedData)
     },
     convertTableEditable: function () {
-      const columns = this.columns
+      const columns = this.tableCol
       for (let i = 0; i < columns.length; i++) {
         const item = columns[i]
         if (item.field === 'order') {
@@ -80,7 +82,7 @@ export default {
           break
         }
       }
-      this.columns = [].concat(columns)
+      this.tableCol = [].concat(columns)
     }
   },
   template: '#table-component'

@@ -3,7 +3,7 @@
     <h3>{{ careCategoryName }} Json Config</h3>
     <!-- <pre>{{ careCategoryData }}</pre> -->
     <Table
-      v-if="gridData"
+      v-if="gridData && gridData.length"
       :data="gridData"
       :columns="gridColumns"
     />
