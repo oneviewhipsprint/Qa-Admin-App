@@ -6,14 +6,9 @@
       v-if="gridData && gridData.length"
       :data="gridData"
       :columns="gridColumns"
+      @update-config="save"
     />
     <div>
-      <button
-        class="btn-save"
-        @click="click"
-      >
-        Save
-      </button>
       <span
         v-if="message"
         class="alert-success"
@@ -50,19 +45,19 @@ export default {
       gridColumns: [
         {
           name: 'Name',
-          field: 'displayableName'
+          field: 'displayablename'
         },
         {
           name: 'Order',
-          field: 'order'
+          field: 'testorder'
         },
         {
           name: 'Primary',
-          field: 'isPrimary'
+          field: 'isprimary'
         },
         {
           name: 'Prescription Data',
-          field: 'isPrescriptionData'
+          field: 'isprescriptiondata'
         }
       ]
     }
@@ -81,8 +76,8 @@ export default {
     }
   },
   methods: {
-    click () {
-      this.$emit('update-cart', this.careCategoryData)
+    save (data) {
+      this.$emit('update-care-category', this.careCategoryData)
     }
   },
   template: '#care-category'

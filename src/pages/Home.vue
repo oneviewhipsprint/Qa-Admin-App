@@ -37,19 +37,19 @@
         </ul>
       </nav>
       <section>
-        <div class="tab1">
+        <div class="tab1 tab-div">
           <CareCategory
             care-category-name="Bp and Fluids"
             :care-category-data="response"
             :message="message"
-            @update-cart="updateCart"
+            @update-care-category="updateCareCategory"
           />
         </div>
-        <div class="tab2">
+        <div class="tab2 tab-div">
           <h2>Anemia</h2>
           <p>Currently no data</p>
         </div>
-        <div class="tab3">
+        <div class="tab3 tab-div">
           <h2>Adequacy</h2>
           <p>Currently no data</p>
         </div>
@@ -85,7 +85,7 @@ export default {
         console.error(error)
       })
     },
-    updateCart (data) {
+    updateCareCategory (data) {
       console.log('working' + data)
       axios({ method: 'POST',
         url: '/api/patients/save-configs',

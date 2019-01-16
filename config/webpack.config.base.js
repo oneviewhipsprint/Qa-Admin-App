@@ -18,41 +18,19 @@ module.exports = {
     },
 
     module: {
-        rules: [
+        rules:  [
             {
                 test: /\.(js|vue)$/,
                 use: 'eslint-loader',
                 enforce: 'pre'
             }, {
                 test: /\.vue$/,
-                loader: 'vue-loader',
-                options: {
-                    loaders: {
-                        'scss': 'vue-style-loader!css-loader!sass-loader',
-                        'sass': 'vue-style-loader!css-loader!sass-loader?indentedSyntax'
-                    }
-                }
+                use: 'vue-loader'
             }, {
                 test: /\.js$/,
                 use: {
                     loader: 'babel-loader',
                 }
-            }, {
-                test: /\.css$/,
-                use: [
-                    'style-loader',
-                    'css-loader'
-                ]
-            }, {
-                test: /\.scss$/,
-                use: [
-                    {
-                        loader: 'css-loader'
-                    },
-                    {
-                        loader: 'sass-loader'
-                    }
-                ]
             }, {
                 test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
                 use: {

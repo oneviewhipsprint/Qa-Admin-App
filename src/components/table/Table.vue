@@ -1,11 +1,5 @@
 <template>
   <div id="table-component">
-    <button @click="saveOrder">
-      Update
-    </button>
-    <button @click="convertTableEditable">
-      Edit Table
-    </button>
     <table>
       <thead>
         <tr>
@@ -42,6 +36,18 @@
         </tr>
       </tbody>
     </table>
+    <button
+      class="btn-save"
+      @click="saveOrder"
+    >
+      Update Config
+    </button>
+    <button
+      class="btn-save"
+      @click="convertTableEditable"
+    >
+      {{ editBtn }}
+    </button>
   </div>
 </template>
 
@@ -62,25 +68,23 @@ export default {
     console.log(this.data)
     return {
       tableData: this.data,
-      tableCol: this.columns
+      tableCol: this.columns,
+      editBtn: 'Edit',
+      isEdit: false
     }
   },
   methods: {
     saveOrder: function () {
-      const sortedData = this.tableData.sort((a, b) => {
-        return (a.order > b.order) ? 1 : -1
-      })
-
-      this.tableData = [].concat(sortedData)
+      this.convertTableEditable()
+      this.$emit('update-config', this.tableData)
     },
     convertTableEditable: function () {
+      this.isEdit = !this.isEdit
       const columns = this.tableCol
+      this.editBtn = this.isEdit ? 'Cancel' : 'Edit'
       for (let i = 0; i < columns.length; i++) {
         const item = columns[i]
-        if (item.field === 'order') {
-          item.editable = !item.editable
-          break
-        }
+        item.editable = !item.editable
       }
       this.tableCol = [].concat(columns)
     }
@@ -88,3 +92,6 @@ export default {
   template: '#table-component'
 }
 </script>
+<style lang="css" scoped>
+  @import './table.style.css'
+</style>
